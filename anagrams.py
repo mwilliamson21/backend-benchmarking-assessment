@@ -8,7 +8,7 @@
     for an arbitrary list of strings.
 
 """
-__author__ = "???"
+__author__ = "mwilliamson with help from instructor"
 
 import sys
 
@@ -39,12 +39,18 @@ def find_anagrams(words):
         {'dgo': ['dog'], 'act': ['cat', 'act']}
 
     """
-    anagrams = {
-        alphabetize(word): [
-            w for w in words
-            if alphabetize(w) == alphabetize(word)]
-        for word in words}
+    from collections import defaultdict
+
+    anagrams = defaultdict(list)
+    for word in words:
+        anagrams[alphabetize(word)].append(word)
     return anagrams
+    # anagrams = {
+    #     alphabetize(word): [
+    #         w for w in words
+    #         if alphabetize(w) == alphabetize(word)]
+    #     for word in words}
+    # return anagrams
 
 
 if __name__ == "__main__":
@@ -55,4 +61,5 @@ if __name__ == "__main__":
     else:
         with open(sys.argv[1], 'r') as handle:
             words = handle.read().split()
-            print find_anagrams(words)
+            ana_dict = find_anagrams(words)
+            print ana_dict
